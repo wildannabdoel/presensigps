@@ -93,6 +93,26 @@
     </div>
     <div class="row">
         <div class="col-12">
+            <div class="input-icon mb-3">
+                <span class="input-icon-addon">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-phone-plus">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                        <path d="M15 6h6m-3 -3v6" />
+                    </svg>
+                </span>
+                <input type="text" id="alamat" value="{{ $karyawan->alamat }}" class="form-control"
+                    name="alamat" placeholder="Alamat">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <select name="kode_dpt" id="kode_dpt" class="form-select">
                 <option value="">Bidang</option>
                 @foreach ($departemen as $d)

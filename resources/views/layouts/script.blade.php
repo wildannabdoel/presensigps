@@ -16,11 +16,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 <!-- Base Js File -->
 <script src="{{ asset('assets/js/base.js') }}"></script>
 
 <script>
-    am4core.ready(function () {
+    am4core.ready(function() {
 
         // Themes begin
         am4core.useTheme(am4themes_animated);
@@ -31,8 +34,7 @@
 
         chart.legend = new am4charts.Legend();
 
-        chart.data = [
-            {
+        chart.data = [{
                 country: "Hadir",
                 litres: 501.9
             },

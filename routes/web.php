@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartemenController;
@@ -40,6 +41,8 @@ Route::middleware('auth:karyawan')->group(function () {
     Route::get('/presensi/buatizin', [PresensiController::class, 'buatizin']);
     Route::post('/presensi/storeizin', [PresensiController::class, 'storeizin']);
     Route::post('/presensi/cekpengajuanizin',[PresensiController::class,'cekpengajuanizin']);
+
+    Route::get('/lokasi/pegawai',[DashboardController::class,'lokasipegawai']);
 });
 Route::middleware('auth:user')->group(function () {
     Route::get('/panel/dashboardadmin', [DashboardController::class, 'dashboardadmin']);
@@ -72,4 +75,11 @@ Route::middleware('auth:user')->group(function () {
     //konfigurasi
     Route::get('konfigurasi/lokasikantor',[KonfigurasiController::class,'lokasikantor']);
     Route::post('konfigurasi/updatelokasi',[KonfigurasiController::class,'updatelokasi']);
+
+    //admin
+    Route::get('/user', [AdminController::class, 'index']);
+    Route::post('/user/store', [AdminController::class, 'store']);
+    Route::post('/user/edit', [AdminController::class, 'edit']);
+    Route::post('/user/{id}/update', [AdminController::class, 'update']);
+    Route::post('/user/{id}/delete', [AdminController::class, 'delete']);
 });

@@ -40,6 +40,7 @@ class KaryawanController extends Controller
         $nama_lengkap = $request->nama_lengkap;
         $jabatan = $request->jabatan;
         $no_hp = $request->no_hp;
+        $alamat = $request->alamat;
         $kode_dpt = $request->kode_dpt;
         $password = Hash::make('12345');
 
@@ -56,6 +57,7 @@ class KaryawanController extends Controller
                 'no_hp' => $no_hp,
                 'kode_dpt' => $kode_dpt,
                 'foto' => $foto,
+                'alamat' => $alamat,
                 'password' => $password
             ];
             $simpan = DB::table('karyawans')->insert($data);
@@ -67,7 +69,7 @@ class KaryawanController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $d) {
-            return Redirect::back()->with(['error' => 'Data Gagal Disimpan']);
+            return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
         }
     }
     public function edit(Request $request){
@@ -80,6 +82,7 @@ class KaryawanController extends Controller
         $nik = $request->nik;
         $nama_lengkap = $request->nama_lengkap;
         $jabatan = $request->jabatan;
+        $alamat = $request->alamat;
         $no_hp = $request->no_hp;
         $kode_dpt = $request->kode_dpt;
         $password = Hash::make('12345');
@@ -96,6 +99,7 @@ class KaryawanController extends Controller
                 'no_hp' => $no_hp,
                 'kode_dpt' => $kode_dpt,
                 'foto' => $foto,
+                'alamat' => $alamat,
                 'password' => $password
             ];
             $update = DB::table('karyawans')->where('nik',$nik)->update($data);

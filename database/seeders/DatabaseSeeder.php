@@ -16,11 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Karyawan::create([
-            'nik' => '12345678',
-            'nama_lengkap' => 'Wildan',
-            'jabatan' => 'Jenderal',
-            'no_hp' => '08123456789',
+        User::create([
+            'name' => 'wildan',
+            'email' => 'wildan12345@admin.com',
             'password' => bcrypt('wildan1234'),
             'remember_token' => 'null',
         ]);

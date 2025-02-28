@@ -103,6 +103,7 @@
                                                 <td>Jabatan</td>
                                                 <td>NO HP</td>
                                                 <td>Foto</td>
+                                                <td>Alamat</td>
                                                 <td>Bidang</td>
                                                 <td>Aksi</td>
                                             </tr>
@@ -124,9 +125,10 @@
                                                             <img src="{{ asset('assets/img/nophoto.png') }}" alt=""
                                                                 class="avatar">
                                                         @else
-                                                            <img src="{{ url($path) }}" alt="" class="avatar">
+                                                            <img src="{{ url($path) }}" alt="" height="70px" width="70px">
                                                         @endif
                                                     </td>
+                                                    <td>{{ $d->alamat }}</td>
                                                     <td> {{ $d->nama_dpt }}</td>
                                                     <td>
                                                         <div class="btn-group">
@@ -286,6 +288,24 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
+                                <div class="input-icon mb-3">
+                                    <span class="input-icon-addon">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-badge-down">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M17 13v-6l-5 4l-5 -4v6l5 4z" />
+                                        </svg>
+                                    </span>
+                                    <input type="text" id="alamat" value="" name="alamat"
+                                        class="form-control" placeholder="Alamat">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
                                 <select name="kode_dpt" id="kode_dpt" class="form-select">
                                     <option value="">Bidang</option>
                                     @foreach ($departemen as $d)
@@ -385,6 +405,7 @@
                 var jabatan = $("#jabatan").val().trim();
                 var no_hp = $("#no_hp").val().trim();
                 var kode_dpt = $("#kode_dpt").val().trim();
+                var alamat = $("#alamat").val().trim();
 
                 if (nik === "") {
                     Swal.fire({
@@ -414,6 +435,17 @@
                         confirmButtonText: 'OK'
                     }).then(() => {
                         $("#jabatan").focus();
+                    });
+                    return false;
+
+                } else if (alamat === "") {
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Alamat Harus Di Isi',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        $("#alamat").focus();
                     });
                     return false;
                 } else if (no_hp === "") {
