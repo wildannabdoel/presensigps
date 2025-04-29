@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
 use App\Models\pengajuan_izin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -294,6 +295,11 @@ class PresensiController extends Controller
             ->whereRaw('YEAR(tanggal_presensi)="' . $tahun . '"')
             ->orderBy('tanggal_presensi')
             ->get();
+        $karyawan = Karyawan::find($nik);
+        if (!$karyawan) {
+            return redirect()->back()->with('warning', 'Data karyawan tidak ditemukan');
+        }
+
 
         return view('presensi.cetaklaporan', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi'));
     }

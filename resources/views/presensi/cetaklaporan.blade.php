@@ -110,7 +110,8 @@
         .ttd i {
             font-size: 14px;
         }
-        .pemda{
+
+        .pemda {
             font-family: 'Times New Roman', Times, serif;
             font-size: 28px;
         }
@@ -150,9 +151,13 @@
             <tr>
                 <td rowspan="6">
                     @php
-                        $path = Storage::url('uploads/karyawan/' . $karyawan->foto);
+                        $path = $karyawan?->foto
+                            ? Storage::url('uploads/karyawan/' . $karyawan->foto)
+                            : asset('assets/img/nophoto.png');
                     @endphp
-                    <img src="{{ url($path) }}" alt="Foto Karyawan" class="foto-karyawan">
+
+                    <img src="{{ $path }}" alt="Foto Karyawan" class="foto-karyawan">
+
                 </td>
                 <td><strong>NIK</strong></td>
                 <td>:</td>

@@ -143,7 +143,61 @@
                     </div>
                 </div>
             </div>
+            <div class="row" style="margin-top: 50px">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <h2 class="page-title" style="justify-content: center;">Karyawan Hadir Tanggal {{ date('d-m-Y') }}</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-vcenter card-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Jabatan</th>
+                                            <th>Jam Hadir</th>
+                                            <th>Jam Pulang</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($leaderboard as $d)
+                                            @php
+                                                $path = Storage::url('/uploads/karyawan/' . $d->foto);
+                                            @endphp
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex py-1 align-items-center">
+                                                        <img src="{{ url($path) }}" alt=""
+                                                            class="avatar me-2">
+                                                        <div class="flex-fill">
+                                                            <div class="font-weight-medium">{{ $d->nama_lengkap }}</div>
+                                                            <div class="text-muted"><a href="#"
+                                                                    class="text-reset">{{ $d->no_hp }}</a></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>{{ $d->jabatan }}</div>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge {{ $d->jam_in < '07:30' ? 'bg-success' : 'bg-danger' }}">{{ $d->jam_in }}</span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge badge-danger">{{ $d->jam_out != null ? $d->jam_out : 'Belum Absen' }}</span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
 @endsection

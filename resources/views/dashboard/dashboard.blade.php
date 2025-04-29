@@ -1,17 +1,23 @@
 @extends('layouts.presensi')
 @section('content')
-<style>
-    .logout{
-        position: absolute;
-        color: white;
-        font-size: 30px;
-        text-decoration: none;
-        right: 10px;
-    }
-    .logout:hover{
-        color: white;
-    }
-</style>
+    <style>
+        .logout {
+            position: absolute;
+            color: white;
+            font-size: 30px;
+            text-decoration: none;
+            right: 10px;
+        }
+
+        .logout:hover {
+            color: white;
+        }
+
+        .disabled {
+            color: gray;
+            text-decoration: none;
+        }
+    </style>
     <div class="section" id="user-section">
         <a href="/proseslogout" class="logout">
             <ion-icon name="exit"></ion-icon>
@@ -100,10 +106,12 @@
                                         <ion-icon name="camera-outline"></ion-icon>
                                     @endif
                                 </div>
-                                <div class="presencedetail">
-                                    <h4 class="presencetitle">Masuk</h4>
-                                    <span>{{ $presensihariini != null ? $presensihariini->jam_in : 'Belum Absen' }}</span>
-                                </div>
+                                <a href="/presensi/create" style="color:aliceblue; text-decoration:none;">
+                                    <div class="presencedetail">
+                                        <h4 class="presencetitle">Masuk</h4>
+                                        <span>{{ $presensihariini != null ? $presensihariini->jam_in : 'Belum Absen' }}</span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -122,10 +130,12 @@
                                         <ion-icon name="camera-outline"></ion-icon>
                                     @endif
                                 </div>
-                                <div class="presencedetail">
-                                    <h4 class="presencetitle">Pulang</h4>
-                                    <span>{{ $presensihariini != null && $presensihariini->jam_out != null ? $presensihariini->jam_out : 'Belum Absen' }}</span>
-                                </div>
+                                <a href="/presensi/create" class="absenpulang" style="color: aliceblue; text-decoration:none;">
+                                    <div class="presencedetail">
+                                        <h4 class="presencetitle">Pulang</h4>
+                                        <span>{{ $presensihariini != null && $presensihariini->jam_out != null ? $presensihariini->jam_out : 'Belum Absen' }}</span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -252,4 +262,24 @@
         </div>
     </div>
 @endsection
+@push('myscript')
+    <script>
+        $(document).ready(function() {
+            $(".absenpulang").click(function(event) {
+                var now = new Date();
+                var hours = now.getHours(); 
+
+                if (hours < 14) { 
+                    event.preventDefault(); // Mencegah link terbuka
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Absen hanya bisa dilakukan pada pukul 14:00',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+    </script>
+@endpush
 

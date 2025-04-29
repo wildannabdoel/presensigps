@@ -78,6 +78,20 @@ class DashboardController extends Controller
             ->where('tgl_izin', $hariini)
             ->where('status_approved', 1)
             ->first();
-        return view('dashboard.dashboardadmin', compact('rekappresensi', 'rekapizin'));
+
+        $hariini = date('Y-m-d');
+        $nik = Auth::guard('user')->user()->nik;
+        $presensihariini = DB::table('presensis')
+            ->where('nik', $nik)->where('tanggal_presensi', $hariini)->first();
+
+        $leaderboard = DB::table('presensis')
+            ->join('karyawans', 'presensis.nik', '=', 'karyawans.nik')
+            ->where('tanggal_presensi', $hariini)
+            ->orderBy('jam_in', 'asc')
+            ->orderBy('jam_out', 'asc')
+            ->get();
+        $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        return view('dashboard.dashboardadmin', compact('rekappresensi', 'rekapizin', 'leaderboard','presensihariini'));
     }
 }

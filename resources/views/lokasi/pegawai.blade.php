@@ -11,14 +11,20 @@
     </div>
 @endsection
 @section('content')
-    <div class="row" style="margin-top: 70px">
+    <div class="col">
+        <div class="row" style="margin-top: 70px">
+            <h3>Titik Kordinat Anda</h3>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col">
             <input type="text" id="lokasi" autocomplete="off">
         </div>
     </div>
     <style>
         #map {
-            height: 300px;
+            height: 450px;
         }
     </style>
     <div id="map">
@@ -37,7 +43,6 @@
             var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
         }
